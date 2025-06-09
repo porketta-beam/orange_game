@@ -236,6 +236,9 @@ export default function App() {
             <button className="reset-button" onClick={startGame}>
               Reset
             </button>
+            <button className="home-button" onClick={() => setIsPlaying(false)}>
+              Home
+            </button>
           </div>
           <TimeGauge timeLeft={timeLeft} totalTime={120} />
           <div
