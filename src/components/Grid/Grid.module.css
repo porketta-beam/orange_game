@@ -11,7 +11,7 @@
   color: #ffffff;
   background-color: var(--secondary-color);
   background-image: url('/orange_bg.png');
-  background-size: cover;
+  background-size: 120%;
   background-position: center;
   border-radius: 50%;
   display: flex;

@@ -14,8 +14,8 @@ export default function Cell({ cell, onSelect }) {
   return (
     <div
       className={styles.cell}
-      onClick={() => onSelect(cell)}
       data-cell-id={cell.id}
+      style={cell.isBomb ? { fontSize: '2rem' } : {}}
     >
       {cell.isBomb ? "💣" : cell.value}
     </div>
