@@ -6,6 +6,7 @@ import TimeGauge from "./components/TimeGauge/TimeGauge";
 import ScoreModal from "./components/ScoreModal/ScoreModal";
 import Grid from "./components/Grid/Grid";
 import { initializeGrid } from "./utils";
+import { startTimeCounter } from "./utils/timecounter";
 import "./assets/styles/global.css";
 
 export default function App() {
@@ -185,6 +186,31 @@ export default function App() {
       window.removeEventListener("mouseleave", onMouseLeave);
     };
   }, [dragStart, grid, dragRect]);
+
+  const [timerId, setTimerId] = useState(null);
+
+  // 게임 시작 시 타이머 시작
+  useEffect(() => {
+    if (isPlaying) {
+      // 기존 타이머가 있다면 정지
+      if (timerId) clearInterval(timerId);
+      const id = startTimeCounter(120, (newTimeLeft) => {
+        setTimeLeft(newTimeLeft);
+        if (newTimeLeft <= 0) {
+          setIsPlaying(false);
+          setShowScoreModal(true);
+        }
+      });
+      setTimerId(id);
+    } else {
+      // 게임이 끝나면 타이머 정지
+      if (timerId) clearInterval(timerId);
+    }
+    // 언마운트 시 타이머 정지
+    return () => {
+      if (timerId) clearInterval(timerId);
+    };
+  }, [isPlaying]);
 
   return (
     <div className="game-wrapper">
