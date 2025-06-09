@@ -12,7 +12,7 @@ export function initializeGrid(rows = 20, cols = 10) {
   for (let r = 0; r < rows; r++) {
     const row = [];
     for (let c = 0; c < cols; c++) {
-      const isBomb = Math.random() < 0.1;
+      const isBomb = Math.random() < 0.02;
       const value = isBomb ? null : Math.floor(Math.random() * 9) + 1;
       row.push({
         id: `cell-${idCounter++}`,
