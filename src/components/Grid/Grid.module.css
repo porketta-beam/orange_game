@@ -23,11 +23,6 @@
   transition: background-color 0.2s;
 }
 
-.cell:hover {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-}
-
 .cell.cleared {
   visibility: hidden;
 }
