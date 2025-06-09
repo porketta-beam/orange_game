@@ -229,7 +229,12 @@ export default function App() {
         </div>
       ) : (
         <>
-          <ScoreBoard score={score} />
+          <div className="game-controls">
+            <ScoreBoard score={score} />
+            <button className="reset-button" onClick={startGame}>
+              Reset
+            </button>
+          </div>
           <TimeGauge timeLeft={timeLeft} totalTime={120} />
           <div
             className="game-area"
