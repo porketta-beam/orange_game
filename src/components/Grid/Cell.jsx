@@ -15,7 +15,6 @@ export default function Cell({ cell, isSelected, onMouseDown, onMouseEnter }) {
       className={`${styles.cell} ${isSelected ? styles.selected : ""}`}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
-      className={styles.cell}
       data-cell-id={cell.id}
       style={cell.isBomb ? { fontSize: "2rem" } : {}}
     >
