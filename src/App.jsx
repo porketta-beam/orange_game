@@ -190,8 +190,7 @@ export default function App() {
     <div className="game-wrapper">
       {!isPlaying ? (
         <div className="welcome-screen">
-          <Header title="오렌지 게임" />
-          <button onClick={startGame}>Play</button>
+          <Header title="오렌지 게임" onPlay={startGame} />
         </div>
       ) : (
         <>
