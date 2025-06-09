@@ -118,6 +118,20 @@ export default function App() {
           const rows = newGrid.length;
           const cols = newGrid[0].length;
 
+          // 전체 폭탄 개수 계산
+          const totalBombs = newGrid
+            .flat()
+            .filter((cell) => cell.isBomb && !cell.cleared).length;
+          // 폭탄 개수에 따른 확률 설정
+          const clearProbability =
+            totalBombs >= 4
+              ? 0.05
+              : totalBombs >= 3
+              ? 0.1
+              : totalBombs >= 2
+              ? 0.25
+              : 0.5;
+
           // 8방향
           const deltas = [
             [-1, -1],
@@ -132,14 +146,13 @@ export default function App() {
 
           let bonus = 0;
 
-          // 주변 셀들 50% 확률로 제거
+          // 주변 셀들 확률에 따라 제거
           deltas.forEach(([dr, dc]) => {
             const nr = bombCell.row + dr;
             const nc = bombCell.col + dc;
             if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
               const neighbor = newGrid[nr][nc];
-              // 50% 확률로 제거
-              if (!neighbor.cleared && Math.random() < 0.2) {
+              if (!neighbor.cleared && Math.random() < clearProbability) {
                 neighbor.cleared = true;
                 bonus += neighbor.value || 0;
               }
