@@ -52,11 +52,30 @@ body {
 
 /* 웰컴 화면 */
 .welcome-screen {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 30px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe0b2 100%);
+}
+
+.welcome-orange {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .game-controls {

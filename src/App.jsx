@@ -7,6 +7,7 @@ import ScoreModal from "./components/ScoreModal/ScoreModal";
 import Grid from "./components/Grid/Grid";
 import { initializeGrid } from "./utils";
 import { startTimeCounter } from "./utils/timecounter";
+import orangeImage from "./assets/images/cute-orange.png";
 import "./assets/styles/global.css";
 
 export default function App() {
@@ -225,6 +226,7 @@ export default function App() {
     <div className="game-wrapper">
       {!isPlaying ? (
         <div className="welcome-screen">
+          <img src={orangeImage} alt="Cute Orange" className="welcome-orange" />
           <Header title="오렌지 게임" onPlay={startGame} />
         </div>
       ) : (
