@@ -7,10 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
-  "homepage": "https://porketta-beam.github.io/orange_game/",
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
