@@ -16,7 +16,7 @@ export default function Cell({ cell, isSelected, onMouseDown, onMouseEnter }) {
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
       data-cell-id={cell.id}
-      style={cell.isBomb ? { fontSize: '2rem' } : {}}
+      style={cell.isBomb ? { fontSize: "2rem" } : {}}
     >
       {cell.isBomb ? "💣" : cell.value}
     </div>
