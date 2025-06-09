@@ -23,11 +23,23 @@ export default function App() {
 
   // 게임 초기화
   const startGame = () => {
+    // 기존 타이머가 있다면 정지
+    if (timerId) clearInterval(timerId);
+    setTimerId(null);
     setGrid(initializeGrid(10, 15));
     setScore(0);
     setTimeLeft(120);
     setIsPlaying(true);
     setShowScoreModal(false);
+    // 타이머 즉시 시작
+    const id = startTimeCounter(120, (newTimeLeft) => {
+      setTimeLeft(newTimeLeft);
+      if (newTimeLeft <= 0) {
+        setIsPlaying(false);
+        setShowScoreModal(true);
+      }
+    });
+    setTimerId(id);
   };
 
   // 전역 mousemove / mouseup 바인딩
@@ -73,7 +85,7 @@ export default function App() {
       console.log(`Selected cells sum: ${sum}`);
     };
 
-    const onMouseUp = (e) => {
+    const onMouseUp = () => {
       if (!dragStart) return;
 
       // 마우스 업 시점에 선택된 셀들의 합계를 체크
@@ -189,28 +201,12 @@ export default function App() {
 
   const [timerId, setTimerId] = useState(null);
 
-  // 게임 시작 시 타이머 시작
+  // 언마운트 시 타이머 정지
   useEffect(() => {
-    if (isPlaying) {
-      // 기존 타이머가 있다면 정지
-      if (timerId) clearInterval(timerId);
-      const id = startTimeCounter(120, (newTimeLeft) => {
-        setTimeLeft(newTimeLeft);
-        if (newTimeLeft <= 0) {
-          setIsPlaying(false);
-          setShowScoreModal(true);
-        }
-      });
-      setTimerId(id);
-    } else {
-      // 게임이 끝나면 타이머 정지
-      if (timerId) clearInterval(timerId);
-    }
-    // 언마운트 시 타이머 정지
     return () => {
       if (timerId) clearInterval(timerId);
     };
-  }, [isPlaying]);
+  }, [timerId]);
 
   return (
     <div className="game-wrapper">
@@ -220,7 +216,6 @@ export default function App() {
         </div>
       ) : (
         <>
-          <Header title="오렌지 게임" onPlay={startGame} />
           <ScoreBoard score={score} />
           <TimeGauge timeLeft={timeLeft} totalTime={120} />
           <div
