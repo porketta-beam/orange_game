@@ -22,7 +22,7 @@ export default function App() {
 
   // 게임 초기화
   const startGame = () => {
-    setGrid(initializeGrid(20, 10));
+    setGrid(initializeGrid(10, 15));
     setScore(0);
     setTimeLeft(120);
     setIsPlaying(true);
@@ -38,6 +38,45 @@ export default function App() {
       const w = Math.abs(e.clientX - dragStart.x);
       const h = Math.abs(e.clientY - dragStart.y);
       setDragRect({ x, y, width: w, height: h });
+
+      // 드래그 영역 내의 셀들을 찾아서 선택 상태로 변경
+      const selectedCells = grid.flatMap((row, rowIndex) =>
+        row.filter((cell) => {
+          const cellElement = document.querySelector(
+            `[data-cell-id="${cell.id}"]`
+          );
+          if (!cellElement || cell.cleared) return false;
+
+          const rect = cellElement.getBoundingClientRect();
+          // 셀이 드래그 영역과 겹치는지 확인
+          return !(
+            rect.right < x ||
+            rect.left > x + w ||
+            rect.bottom < y ||
+            rect.top > y + h
+          );
+        })
+      );
+
+      // 선택된 셀들의 숫자 합계 계산 (폭탄 제외)
+      const sum = selectedCells.reduce((acc, cell) => {
+        if (cell.isBomb) return acc;
+        return acc + (cell.value || 0);
+      }, 0);
+
+      // 합이 10이면 선택된 셀들을 제거
+      if (sum === 10) {
+        setGrid((prevGrid) =>
+          prevGrid.map((row) =>
+            row.map((cell) =>
+              selectedCells.some((selected) => selected.id === cell.id)
+                ? { ...cell, cleared: true }
+                : cell
+            )
+          )
+        );
+        setScore((prev) => prev + sum);
+      }
     };
     const onMouseUp = () => {
       setDragStart(null);
