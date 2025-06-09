@@ -216,7 +216,6 @@ export default function App() {
         </div>
       ) : (
         <>
-          <Header title="오렌지 게임" onPlay={startGame} />
           <ScoreBoard score={score} />
           <TimeGauge timeLeft={timeLeft} totalTime={120} />
           <div
