@@ -126,7 +126,7 @@ export default function App() {
             if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
               const neighbor = newGrid[nr][nc];
               // 50% 확률로 제거
-              if (!neighbor.cleared && Math.random() < 0.5) {
+              if (!neighbor.cleared && Math.random() < 0.2) {
                 neighbor.cleared = true;
                 bonus += neighbor.value || 0;
               }
