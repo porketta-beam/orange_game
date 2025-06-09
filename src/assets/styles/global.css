@@ -1,6 +1,5 @@
 :root {
-  --primary-color: #f97316; /* 오렌지 색상 */
-  --secondary-color: #ffffff;
+  --primary-color: #f97316;
   --bg-color: #f9fafb;
   --text-color: #1f2937;
   --font-family: "Noto Sans KR", sans-serif;
@@ -14,8 +13,27 @@ body {
   font-family: var(--font-family);
 }
 
-.flex-center {
+/* 전체 래퍼 */
+.game-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 드래그 사각형 오버레이 */
+.drag-rect {
+  position: absolute;
+  border: 2px dashed var(--primary-color);
+  background-color: rgba(249, 115, 22, 0.2);
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* 웰컴 화면 */
+.welcome-screen {
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
