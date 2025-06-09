@@ -12,10 +12,15 @@ export default function Cell({ cell, isSelected, onMouseDown, onMouseEnter }) {
 
   return (
     <div
+<<<<<<< HEAD
       className={`${styles.cell} ${isSelected ? styles.selected : ""}`}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
+=======
+      className={styles.cell}
+>>>>>>> 216e1b8487e32bb5b48345d0b1eb01efaeb8bd91
       data-cell-id={cell.id}
+      style={cell.isBomb ? { fontSize: '2rem' } : {}}
     >
       {cell.isBomb ? "💣" : cell.value}
     </div>
